@@ -12,7 +12,7 @@ describe('Quizz de automatización', () => {
         cy.get('.veggie_burger').click()
         cy.get(':nth-child(2) > .sub_list > :nth-child(2) > span > .link').click()
         cy.get('[data-testid="startBtn"]').click()
-        cy.wait(5000)
+        cy.wait(100)
         cy.get('.delete').click()
         cy.get('[data-testid="message"]').should('be.visible')
      })
@@ -34,20 +34,19 @@ describe('Quizz de automatización', () => {
         )
      })
 
-    it('Sorted list', () => {
-      cy.visit('https://thelab.boozang.com/')
-      cy.get('.veggie_burger').click()
-      cy.get(':nth-child(4) > .sub_list > :nth-child(1) > span > .link').click()
-      cy.wait(50)
-      cy.get('input').click().type('Hokeis')
-      cy.wait(50)
-      cy.get('.form_btn').click()
-      cy.wait(50)
-      cy.get('input').click().type('Chokomil')
-      cy.wait(50)
-      cy.get('.form_btn').click()
-      cy.wait(50)
-    })
+     it('Sorted list', () => {
+        cy.visit('https://thelab.boozang.com/')
+        cy.get('.veggie_burger').click()
+        cy.get(':nth-child(4) > .sub_list > :nth-child(1) > span > .link').click()
+      
+        cy.get('input').should('exist').type('Hokeis')
+        cy.get('.form_btn').should('exist').should('not.be.disabled').click()
+      
+        cy.get('input').clear().type('Chokomil')
+        cy.get('.form_btn').click()
+        cy.wait(100)
+      })
+      
 
     it('Form Fill', () => {
         cy.fixture('users').then((users) => {
